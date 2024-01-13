@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E-Learning Menu</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+
+    header {
+      background-color: #333;
+      color: white;
+      padding: 10px;
+      text-align: center;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-around;
+      background-color: #555;
+      padding: 10px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    nav a:hover {
+      background-color: #777;
+    }
+
+    .courses-container {
+      margin: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+    }
+
+    .course-card {
+      background-color: white;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 15px;
+      margin: 10px;
+      width: 300px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .search-bar {
+      text-align: center;
+      margin: 20px;
+    }
+
+    input[type="text"] {
+      padding: 10px;
+      width: 60%;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    input[type="button"] {
+      padding: 10px;
+      background-color: #333;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>E-Learning Platform</h1>
+  </header>
+
+  <nav>
+    <a href="#">Home</a>
+    <a href="#">Courses</a>
+    <a href="#">About</a>
+    <a href="#">Contact</a>
+  </nav>
+
+  <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="Search for courses...">
+    <input type="button" value="Search" onclick="searchCourses()">
+  </div>
+
+  <div class="courses-container" id="coursesContainer">
+    <!-- Course cards will be dynamically added here -->
+  </div>
+
+  <script>
+    // Sample data for courses (replace with your actual data)
+    const coursesData = [
+      { title: 'Introduction to Programming', instructor: 'John Doe' },
+      { title: 'Web Development Basics', instructor: 'Jane Smith' },
+      { title: 'Data Science Fundamentals', instructor: 'Bob Johnson' },
+    ];
+
+    // Function to render course cards
+    function renderCourses() {
+      const coursesContainer = document.getElementById('coursesContainer');
+      coursesContainer.innerHTML = '';
+
+      coursesData.forEach(course => {
+        const courseCard = document.createElement('div');
+        courseCard.className = 'course-card';
+        courseCard.innerHTML = `<h3>${course.title}</h3><p>Instructor: ${course.instructor}</p>`;
+        coursesContainer.appendChild(courseCard);
+      });
+    }
+
+    // Function to search for courses
+    function searchCourses() {
+      const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+
+      const filteredCourses = coursesData.filter(course =>
+        course.title.toLowerCase().includes(searchTerm) ||
+        course.instructor.toLowerCase().includes(searchTerm)
+      );
+
+      // Update the courses container with the filtered courses
+      coursesData.length > 0 ? renderCourses(filteredCourses) : renderCourses();
+    }
+
+    // Initial rendering of courses
+    renderCourses();
+  </script>
+
+</body>
+</html>
